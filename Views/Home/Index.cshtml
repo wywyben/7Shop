@@ -1,0 +1,138 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    ViewData["username"] = "Gabriel";
+}
+@model List<Products>
+
+<div class="d-flex justify-content-between align-items-center mt-5 mb-4">
+    <div class="head-txt">
+        <h2 class="fw-bolder d-inline-block">Welcome,</h2>
+        <h2 class="fw-bolder d-inline-block"> @ViewData["username"]! </h2>
+    </div>
+    <form method="get" action="@Url.Action("Index")" class="search-box" style="width:25rem;">
+        <i class="bi bi-search"></i>
+        <input type="text" name="searchStr" class="form-control form-input w-100" placeholder="Search by title or description e.g. Duck or DVD">
+        <button type="submit" style="padding: 5px;">Search</button>
+    </form>
+</div>
+
+<div id="gallery" class="gallery">
+    <div class="row">
+
+        @*-----------------------------------Browse by Title Search Function---------------------------*@
+
+        @foreach (var item in Model)
+        {
+            // Convert the string rating to decimal
+            decimal rating = decimal.Parse(item.Rating);
+
+            // Calculate the number of filled stars and the half star based on the rating number
+            int filledStars = (int)Math.Floor(rating);
+            bool hasHalfStar = rating - filledStars >= 0.5m;
+
+            <div class="col-md-3 col-sm-6">
+                <div class="card mb-5">
+                    <img class="card-img-top" src="~/img/@item.ProdctImageUrl" alt="Card image cap">
+                    <div class="card-body">
+                        <p class="card-title h4 fw-bolder">@item.Title</p>
+                        <div class="d-flex justify-content-left small text-warning mb-2">
+                            @for (int i = 0; i < filledStars; i++)
+                            {
+                                <div class="bi-star-fill"></div>
+                            }
+                            @if (hasHalfStar)
+                            {
+                                <div class="bi-star-half"></div>
+                            }
+                            @for (int i = 0; i < 5 - filledStars - (hasHalfStar ? 1 : 0); i++)
+                            {
+                                <div class="bi-star"></div>
+                            }
+                        </div>
+                        @*<div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-fill"></div>
+                            <div class="bi-star-half"></div>
+                            <div class="bi-star"></div>*@
+                        <p class=""> Rating: @item.Rating stars </p>
+                        <p class=""> Price: @item.Price </p>
+                        <p class=""> Description: @item.Description </p>
+                        <p class=""> Category: @item.Category </p>
+
+                        @*<div class="card-desc">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </p>
+                            </div>*@
+                        <button type="button" class="btn btn-addcart w-100">Add to Cart</button>
+
+
+                        @*-----------------------------------Browse End---------------------------*@
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@*--------------------------------------------Detailed Search function & Simple List----------------------------------*@
+
+<b><u>Simple List</b></u>
+<form method="get" action="@Url.Action("DetailedSearch")">
+    <input type="text" name="searchStr" class="form-control form-input w-100" placeholder="Search by details e.g. adventure, PG13, story, NowJeans " style="padding: 5px;">
+    <button type="submit" style="padding: 5px;">Search</button>
+</form>
+
+</br>
+
+
+@* construct table-header *@
+<table>
+    <tr>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Rating (Stars)</th>
+        <th>Description</th>
+        <th>Category</th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        // Convert the string rating to decimal
+        decimal rating = decimal.Parse(item.Rating);
+
+        // Calculate the number of filled stars and the half star based on the rating number
+        int filledStars = (int)Math.Floor(rating);
+        bool hasHalfStar = rating - filledStars >= 0.5m;
+
+        @* Display the particulars of a product in a table row *@
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.Price</td>
+            <td>
+                @item.Rating
+            <div class="d-flex justify-content-left small text-warning mb-2">
+                @for (int i = 0; i < filledStars; i++)
+                {
+                    <div class="bi-star-fill"></div>
+                }
+                @if (hasHalfStar)
+                {
+                    <div class="bi-star-half"></div>
+                }
+                @for (int i = 0; i < 5 - filledStars - (hasHalfStar ? 1 : 0); i++)
+                {
+                    <div class="bi-star"></div>
+                }
+            </div>
+        </td>
+        <td>@item.Description</td>
+        <td>@item.Category</td>
+    </tr>
+}
+
+</table>
+@*-----------------------------------------Simple List End----------------------------------*@

@@ -1,0 +1,68 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{ViewData["Title"] = "View Cart";
+}
+
+<div class="d-flex justify-content-between align-items-center mt-5 mb-4">
+    <div class="head-txt">
+        <h2 class="fw-bolder d-inline-block">@ViewData["Title"]</h2>
+    </div>
+</div>
+
+<div id="cart-list" class="cart-list">
+    @for (int i = 0; i < 4; i++)
+    {
+        <div class="row py-4 border-bottom">
+            <div class="card col-8 px-0">
+                <div class="row g-0">
+                    <div class="col-md-3 order-1 order-md-1">
+                        <img class="img-fluid rounded-start" src="~/img/newjeans.jpeg" alt="Card image cap">
+                    </div>
+                    <div class="col-md-9 order-2 order-md-2">
+                        <div class="card-body pb-0">
+                            <p class="card-ttl h4 fw-bolder">Book Title @i</p>
+                            <div class="card-desc">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4 d-flex flex-column justify-content-between">
+                <div class="row">
+                    <div class="price-tag col-8">
+                        <p class="h5 d-inline-block fw-bolder">Price:</p>
+                        <span class="h5">$0.00</span>
+                    </div>
+                    <div class="form-outline col-4">
+                        <input type="number" id="typeNumber" class="form-control" value="1" min="0" />
+                    </div>
+                </div>
+                <button class="btn btn-danger w-100">
+                    <i class="bi bi-trash"></i>
+                    Remove from cart
+                </button>
+            </div>
+        </div>
+    }
+</div>
+<div class="cart-detail row g-0">
+    <div class="d-flex flex-row justify-content-end py-4">
+        <p class="d-inline-block h3 fw-bolder me-3">Total</p>
+        <span class="h3">$0.00</span>
+    </div>
+    <div class="cart-aciton-btn border-top d-flex flex-row justify-content-end py-3">
+        <button class="btn btn-secondary mx-2">
+            <i class="bi bi-arrow-left"></i>
+            Continue Shopping
+        </button>
+        <button class="btn btn-success ms-2 w-25">
+            Checkout
+            <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+</div>
+

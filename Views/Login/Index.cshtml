@@ -1,0 +1,46 @@
+﻿@{
+    Layout = null;
+    ViewData["Title"] = "Welcome to Seven Shop";
+}
+
+<html>
+    <head>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/css/login.css" />
+    </head>
+
+    <body>
+
+        <div class="login">
+        
+            <form class="login_form" method="post" >
+                <div class="login_form_header">
+                    Header
+                </div>
+                <div class="login_form_logo">
+                    Logo
+                </div>
+                <div class="login_form_field">
+                    <div class="login_form_field_wrapper">
+                    <input type="text" name="username" placeholder="Username" />
+                    <span class="login_form_field_label"></span>
+                    </div>
+                    <div class="login_form_field_wrapper">
+                    <input type="password" name="password" placeholder="Password" />
+                        <span class="login_form_field_label"></span>
+                    </div>
+                </div>
+                <div class="login_form_button">
+                    <button type="submit">LOGIN</button>
+                </div>
+            </form>
+        @if (ViewBag.ErrorMsg != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.ErrorMsg
+            </div>
+        }
+        </div>
+    </body>
+</html>
